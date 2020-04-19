@@ -4,7 +4,7 @@ import pytest
 
 from commitizen import cli
 from tests.utils import create_file_and_commit
-
+from devtools import debug
 
 @pytest.mark.usefixtures("tmp_commitizen_project")
 def test_changlog_on_empty_project(mocker):
@@ -28,7 +28,8 @@ def test_changlog_from_start(mocker, capsys):
         cli.main()
 
     out, _ = capsys.readouterr()
-    assert out == "# CHANGELOG\n\n## Unreleased\n### feat\n- new file\n\n\n"
+    debug(out)
+    assert out == "\n## Unreleased \n### Feat\n- new file\n\n"
 
 
 @pytest.mark.usefixtures("tmp_commitizen_project")
@@ -51,9 +52,10 @@ def test_changlog_from_version_zero_point_two(mocker, capsys):
         cli.main()
 
     out, _ = capsys.readouterr()
+    debug(out)
     assert (
         out
-        == "# CHANGELOG\n\n## Unreleased\n### feat\n- after 0.2\n- after 0.2.0\n\n\n"
+        == "\n## Unreleased \n\n### Feat\n\n- after 0.2\n- after 0.2.0\n\n"
     )
 
 

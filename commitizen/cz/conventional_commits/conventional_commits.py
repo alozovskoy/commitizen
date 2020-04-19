@@ -31,10 +31,8 @@ def parse_subject(text):
 class ConventionalCommitsCz(BaseCommitizen):
     bump_pattern = defaults.bump_pattern
     bump_map = defaults.bump_map
-    changelog_pattern = (
-        r"(?P<break>.*\n\nBREAKING CHANGE)|(?P<feat>^feat)|(?P<fix>^fix)"
-    )
-    changelog_map = OrderedDict({"break": "breaking", "feat": "feat", "fix": "fix"})
+    commit_parser = defaults.commit_parser
+    changelog_pattern = defaults.bump_pattern
 
     def questions(self) -> List[Dict[str, Any]]:
         questions: List[Dict[str, Any]] = [
